@@ -1,0 +1,3 @@
+/home/oscaredd/Calificacion_MIA/Discos/Disco1.mia
+/home/oscaredd/Calificacion_MIA/Discos/Disco3.mia
+/home/oscaredd/Calificacion_MIA/Discos/Disco5.mia

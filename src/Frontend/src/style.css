@@ -1,0 +1,58 @@
+/* ── Reset & Variables ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-base:      #0a0c10;
+  --bg-surface:   #0f1219;
+  --bg-elevated:  #151a24;
+  --bg-panel:     #1a2030;
+  --border:       #1e2a3a;
+  --border-glow:  #2a4060;
+
+  --accent:       #00d4ff;
+  --accent-dim:   #0099bb;
+  --accent-glow:  rgba(0, 212, 255, 0.15);
+
+  --green:        #39d353;
+  --green-dim:    #1a6b2a;
+  --green-glow:   rgba(57, 211, 83, 0.12);
+
+  --red:          #ff4757;
+  --red-dim:      #7a1a22;
+  --red-glow:     rgba(255, 71, 87, 0.12);
+
+  --yellow:       #ffd32a;
+  --yellow-glow:  rgba(255, 211, 42, 0.12);
+
+  --text-primary:   #e2eaf4;
+  --text-secondary: #6b8299;
+  --text-muted:     #3d5060;
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-ui:   'Syne', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+
+/* Selection */
+::selection { background: var(--accent-glow); color: var(--accent); }
