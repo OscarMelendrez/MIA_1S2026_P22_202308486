@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend
+CMAKE_SOURCE_DIR = /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build
+CMAKE_BINARY_DIR = /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -81,14 +81,14 @@ clean: CMakeFiles/Backend.dir/clean
 CMakeFiles/Backend.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Backend.dir/build.make CMakeFiles/Backend.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Backend.dir/build.make CMakeFiles/Backend.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target Backend"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target Backend"
 .PHONY : CMakeFiles/Backend.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Backend.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Backend.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles 0
 .PHONY : CMakeFiles/Backend.dir/rule
 
 # Convenience name for target.

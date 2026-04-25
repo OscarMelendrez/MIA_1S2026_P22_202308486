@@ -1,7 +1,7 @@
 CMakeFiles/Backend.dir/controller/handler.cpp.o: \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/handler.cpp \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/handler.cpp \
  /usr/include/stdc-predef.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/../external/crow_all.h \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/../external/crow_all.h \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -1691,6 +1691,6 @@ CMakeFiles/Backend.dir/controller/handler.cpp.o: \
  /usr/include/nlohmann/ordered_map.hpp \
  /usr/include/nlohmann/detail/macro_unscope.hpp \
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/../Analyzer/Analyzer.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/../Analyzer/../model/result.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/../model/structures.h
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/../Analyzer/Analyzer.h \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/../Analyzer/../model/result.h \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/../model/structures.h

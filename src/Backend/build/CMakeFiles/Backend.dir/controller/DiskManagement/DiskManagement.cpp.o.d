@@ -1,7 +1,7 @@
 CMakeFiles/Backend.dir/controller/DiskManagement/DiskManagement.cpp.o: \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/DiskManagement.cpp \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/DiskManagement.cpp \
  /usr/include/stdc-predef.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/DiskManagement.h \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/DiskManagement.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -116,7 +116,7 @@ CMakeFiles/Backend.dir/controller/DiskManagement/DiskManagement.cpp.o: \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../../Utilities/utilities.h \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../../Utilities/utilities.h \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/ios /usr/include/c++/13/exception \
  /usr/include/c++/13/bits/exception_ptr.h \
@@ -157,7 +157,7 @@ CMakeFiles/Backend.dir/controller/DiskManagement/DiskManagement.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../../model/structures.h \
+ /home/ubuntu/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../../model/structures.h \
  /usr/include/c++/13/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
