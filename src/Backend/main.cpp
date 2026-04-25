@@ -22,12 +22,10 @@ static std::string rutasFile() {
 //  Guardar rutas de todos los discos conocidos
 // ============================================================
 void guardarParticionesMontadas() {
-    // Recopilar rutas únicas de los discos montados
     std::set<std::string> rutas;
     for (const auto& pm : particionesMontadas)
         rutas.insert(pm.path);
 
-    // Leer rutas ya guardadas para no perder las anteriores
     std::ifstream fin(rutasFile());
     if (fin.is_open()) {
         std::string linea;
@@ -37,7 +35,6 @@ void guardarParticionesMontadas() {
         fin.close();
     }
 
-    // Escribir todas las rutas
     std::ofstream fout(rutasFile());
     for (const auto& r : rutas)
         fout << r << "\n";
@@ -59,7 +56,6 @@ static std::string calcularDirDiscos() {
 // ============================================================
 static void escanearDisco(const std::string& path) {
     if (!std::filesystem::exists(path)) return;
-
     std::ifstream disco(path, std::ios::binary);
     if (!disco.is_open()) return;
 
@@ -73,13 +69,10 @@ static void escanearDisco(const std::string& path) {
         if (p.part_type  != 'P')  continue;
         if (p.part_status != '1') continue;
 
-        std::string id     = std::string(p.part_id,
-                                 strnlen(p.part_id, 4));
-        std::string nombre = std::string(p.part_name,
-                                 strnlen(p.part_name, 16));
+        std::string id     = std::string(p.part_id,   strnlen(p.part_id,   4));
+        std::string nombre = std::string(p.part_name, strnlen(p.part_name, 16));
         if (id.empty()) continue;
 
-        // Evitar duplicados
         bool yaExiste = false;
         for (const auto& pm : particionesMontadas)
             if (pm.id == id && pm.path == path)
@@ -104,13 +97,10 @@ static void escanearDisco(const std::string& path) {
 
 // ============================================================
 //  Restaurar particiones al iniciar
-//  1. Lee discos_rutas.txt (rutas guardadas previamente)
-//  2. Escanea src/discos/ recursivamente por si hay .mia nuevos
 // ============================================================
 static void escanearDiscos() {
     std::set<std::string> rutasEscaneadas;
 
-    // 1. Leer rutas guardadas en discos_rutas.txt
     std::ifstream fin(rutasFile());
     if (fin.is_open()) {
         std::string linea;
@@ -122,7 +112,6 @@ static void escanearDiscos() {
         fin.close();
     }
 
-    // 2. Escanear src/discos/ recursivamente para .mia locales
     if (std::filesystem::exists(DISCOS_DIR)) {
         for (const auto& entry :
              std::filesystem::recursive_directory_iterator(DISCOS_DIR))
@@ -130,7 +119,7 @@ static void escanearDiscos() {
             if (!entry.is_regular_file()) continue;
             if (entry.path().extension() != ".mia") continue;
             std::string path = entry.path().string();
-            if (rutasEscaneadas.count(path)) continue; // ya lo procesamos
+            if (rutasEscaneadas.count(path)) continue;
             escanearDisco(path);
         }
     }
@@ -138,7 +127,6 @@ static void escanearDiscos() {
 
 // ============================================================
 int main() {
-
     DISCOS_DIR = calcularDirDiscos();
     std::error_code ec;
     std::filesystem::create_directories(DISCOS_DIR, ec);
@@ -162,46 +150,34 @@ int main() {
 
     crow::SimpleApp app;
 
+    // ── /ejecutar (POST + OPTIONS) ───────────────────────────
     CROW_ROUTE(app, "/ejecutar")
-        .methods(crow::HTTPMethod::POST)
+        .methods(crow::HTTPMethod::POST, crow::HTTPMethod::OPTIONS)
         ([](const crow::request& req, crow::response& res) {
-            EjecutarScriptHandler(req, res);
+            if (req.method == crow::HTTPMethod::OPTIONS)
+                CorsPreflightHandler(req, res);
+            else
+                EjecutarScriptHandler(req, res);
         });
 
+    // ── /mounted (GET + OPTIONS) ─────────────────────────────
     CROW_ROUTE(app, "/mounted")
-        .methods(crow::HTTPMethod::GET)
+        .methods(crow::HTTPMethod::GET, crow::HTTPMethod::OPTIONS)
         ([](const crow::request& req, crow::response& res) {
-            MountedHandler(req, res);
+            if (req.method == crow::HTTPMethod::OPTIONS)
+                CorsPreflightHandler(req, res);
+            else
+                MountedHandler(req, res);
         });
 
+    // ── /reportes/:filename (GET + OPTIONS) ──────────────────
     CROW_ROUTE(app, "/reportes/<string>")
-        .methods(crow::HTTPMethod::GET)
+        .methods(crow::HTTPMethod::GET, crow::HTTPMethod::OPTIONS)
         ([](const crow::request& req, crow::response& res, std::string filename) {
-            ReportesHandler(req, res, filename);
-        });
-
-    CROW_ROUTE(app, "/ejecutar")
-        .methods(crow::HTTPMethod::OPTIONS)
-        ([](const crow::request& req, crow::response& res) {
-            CorsPreflightHandler(req, res);
-        });
-
-    CROW_ROUTE(app, "/mounted")
-        .methods(crow::HTTPMethod::OPTIONS)
-        ([](const crow::request& req, crow::response& res) {
-            CorsPreflightHandler(req, res);
-        });
-
-    CROW_ROUTE(app, "/reportes/<string>")
-        .methods(crow::HTTPMethod::OPTIONS)
-        ([](const crow::request& req, crow::response& res, std::string) {
-            CorsPreflightHandler(req, res);
-        });
-
-    CROW_ROUTE(app, "/<path>")
-        .methods(crow::HTTPMethod::OPTIONS)
-        ([](const crow::request& req, crow::response& res, std::string) {
-            CorsPreflightHandler(req, res);
+            if (req.method == crow::HTTPMethod::OPTIONS)
+                CorsPreflightHandler(req, res);
+            else
+                ReportesHandler(req, res, filename);
         });
 
     app.bindaddr("0.0.0.0").port(8080).multithreaded().run();
