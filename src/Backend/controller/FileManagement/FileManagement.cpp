@@ -1441,4 +1441,75 @@ std::string Chmod(const std::string& path, const std::string& ugo, bool r) {
     return "CHMOD: permisos de '" + path + "' cambiados a " + ugo + recursivo;
 }
 
+// ============================================================
+//  LS - Listar directorio para el Frontend en formato Pipe (|)
+// ============================================================
+std::string Ls(const std::string& path) {
+    if (!sesionActual.activa) throw std::runtime_error("LS: no hay sesion activa");
+    
+    ParticionMontada* pm = buscarMontada(sesionActual.idParticion);
+    if (!pm) throw std::runtime_error("LS: particion no encontrada");
+    
+    auto file = Utilities::OpenFile(pm->path);
+    if (!file.is_open()) throw std::runtime_error("LS: no se pudo abrir disco");
+    
+    // Leer estructuras
+    MBR mbr{};
+    file.seekg(0); file.read(reinterpret_cast<char*>(&mbr), sizeof(MBR));
+    Partition part{};
+    for (int i = 0; i < 4; i++) {
+        if (mbr.mbr_partitions[i].part_start == pm->start) { part = mbr.mbr_partitions[i]; break; }
+    }
+    SuperBloque sb{};
+    file.seekg(part.part_start); file.read(reinterpret_cast<char*>(&sb), sizeof(SuperBloque));
+    
+    // Buscar la carpeta que se quiere listar
+    int inodoCarpetaIdx = buscarInodoPorPath(file, sb, path);
+    if (inodoCarpetaIdx == -1) throw std::runtime_error("LS: la ruta no existe");
+    
+    Inodo carpeta{};
+    file.seekg(sb.s_inode_start + inodoCarpetaIdx * sizeof(Inodo));
+    file.read(reinterpret_cast<char*>(&carpeta), sizeof(Inodo));
+    
+    if (carpeta.i_type != INODO_CARPETA) throw std::runtime_error("LS: la ruta no es una carpeta");
+    
+    std::string salida = "";
+    
+    // Recorrer los 12 apuntadores directos de la carpeta
+    for (int i = 0; i < 12; i++) {
+        if (carpeta.i_block[i] == -1) continue;
+        
+        BloqueCarpeta bc{};
+        file.seekg(sb.s_block_start + carpeta.i_block[i] * sizeof(BloqueCarpeta));
+        file.read(reinterpret_cast<char*>(&bc), sizeof(BloqueCarpeta));
+        
+        // Revisar los 4 espacios (archivos/carpetas) dentro de este bloque
+        for (int j = 0; j < 4; j++) {
+            int targetInodoIdx = bc.b_content[j].b_inodo;
+            if (targetInodoIdx != -1) {
+                std::string nombre = bc.b_content[j].b_name;
+                
+                // Omitir "." y ".." para que no saturen la vista en el Frontend
+                if (nombre == "." || nombre == "..") continue;
+                
+                // Leer el inodo del archivo hijo para saber su tamaño y tipo
+                Inodo target{};
+                file.seekg(sb.s_inode_start + targetInodoIdx * sizeof(Inodo));
+                file.read(reinterpret_cast<char*>(&target), sizeof(Inodo));
+                
+                // Extraer variables para el frontend
+                std::string tipo = (target.i_type == INODO_CARPETA) ? "d" : "f";
+                int tamano = target.i_s;
+                std::string permisos = std::string(1, target.i_perm[0]) + target.i_perm[1] + target.i_perm[2];
+                
+                // Unir todo en el formato "Nombre | Tipo | Tamaño | Permisos"
+                salida += nombre + " | " + tipo + " | " + std::to_string(tamano) + " | " + permisos + "\n";
+            }
+        }
+    }
+    
+    file.close();
+    return salida; // Si está vacío, devolverá un string en blanco
+}
+
 } // namespace FileManagement

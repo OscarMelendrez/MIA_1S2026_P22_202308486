@@ -1,6 +1,5 @@
 <template>
   <div class="command-terminal">
-    <!-- Header -->
     <div class="terminal-header">
       <div class="terminal-info">
         <h2 class="terminal-title">Terminal de Comandos</h2>
@@ -12,6 +11,10 @@
         </p>
       </div>
       <div class="header-actions">
+        <button v-if="sesion.activa" class="btn btn-visualizer" @click="emit('openVisualizer')">
+          📁 Visualizador FS
+        </button>
+
         <button v-if="!sesion.activa" class="btn btn-login" @click="goToLogin">
           🔐 Iniciar Sesión
         </button>
@@ -21,9 +24,7 @@
       </div>
     </div>
 
-    <!-- Main Content -->
     <div class="terminal-content">
-      <!-- Input Panel -->
       <section class="input-panel">
         <div class="panel-header">
           <span class="panel-icon">❯</span>
@@ -84,7 +85,6 @@ mkdir -path=/nueva_carpeta
         </div>
       </section>
 
-      <!-- Output Panel -->
       <section class="output-panel">
         <div class="panel-header">
           <span class="panel-icon">◉</span>
@@ -165,7 +165,7 @@ const props = defineProps({
   backendOk: Boolean
 })
 
-const emit = defineEmits(['logout', 'back', 'login'])
+const emit = defineEmits(['logout', 'back', 'login', 'openVisualizer'])
 
 // Estado
 const script = ref('')
@@ -787,6 +787,27 @@ async function handleLogout() {
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+}
+
+/* ── ESTILO NUEVO DEL BOTÓN VISUALIZADOR ── */
+.btn-visualizer {
+  padding: 6px 14px;
+  background: var(--accent);
+  color: var(--bg-base);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-visualizer:hover {
+  background: #33ddff;
+  border-color: #33ddff;
+  box-shadow: 0 0 15px var(--accent-glow);
+  transform: translateY(-1px);
 }
 
 .btn-login {

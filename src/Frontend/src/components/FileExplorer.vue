@@ -1,6 +1,5 @@
 <template>
   <div class="file-explorer">
-    <!-- Header -->
     <div class="explorer-header">
       <button class="btn-back" @click="goBack" title="Volver">
         ← Atrás
@@ -21,9 +20,7 @@
       </button>
     </div>
 
-    <!-- File Explorer -->
     <div class="explorer-content">
-      <!-- Carpetas y Archivos -->
       <div class="file-list">
         <div class="file-list-header">
           <span class="col-name">Nombre</span>
@@ -59,7 +56,6 @@
         </button>
       </div>
 
-      <!-- Vista Previa de Archivo (Panel Derecho) -->
       <div class="file-preview" v-if="selectedFile && !selectedFile.isDirectory">
         <div class="preview-header">
           <h3 class="preview-title">{{ selectedFile.name }}</h3>
@@ -81,7 +77,6 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-
 import BACKEND from '../config.js'
 
 const props = defineProps({
@@ -89,7 +84,7 @@ const props = defineProps({
   discoSeleccionado: Object
 })
 
-const emit = defineEmits(['navigate', 'viewFile'])
+const emit = defineEmits(['navigate', 'viewFile', 'back'])
 
 const currentPath = ref('/')
 const loading = ref(false)
@@ -109,9 +104,11 @@ function buildPath(upToIndex) {
 
 async function loadDirectory(path) {
   loading.value = true
+  items.value = [] // Limpiamos la lista actual
+  
   try {
-    // Ejecutar comando find para listar archivos
-    const script = `find -path=${path} -name=*`
+    // Mandamos el comando ls al backend de C++
+    const script = `ls -path=${path}`
     
     const res = await fetch(`${BACKEND}/ejecutar`, {
       method: 'POST',
@@ -123,42 +120,53 @@ async function loadDirectory(path) {
       const data = await res.json()
       const resultado = data.lineas[0]
       
-      if (resultado.valida) {
-        // Parse the output to extract files
+      if (resultado && resultado.valida && resultado.mensaje) {
         const lines = resultado.mensaje.split('\n').filter(l => l.trim())
+        
         items.value = lines.map(line => {
-          // Extract filename from path
-          const fileName = line.split('/').pop()
+          // El frontend espera el formato: Nombre | Tipo | Tamaño | Permisos
+          const partes = line.split('|').map(p => p.trim())
+          
+          let nombre = partes[0]
+          let isDir = false
+          let size = '-'
+          let perms = '-'
+
+          if (partes.length >= 2) {
+            // Lectura de datos reales del backend
+            isDir = (partes[1].toLowerCase() === 'd' || partes[1].toLowerCase() === 'carpeta' || partes[1] === '1')
+            size = partes[2] || '-'
+            perms = partes[3] || '-'
+          } else {
+            // Fallback: Si tu C++ solo manda el nombre, intenta adivinar por la barra '/'
+            isDir = nombre.endsWith('/') || !nombre.includes('.')
+            if (nombre.endsWith('/')) nombre = nombre.slice(0, -1)
+          }
+
           return {
-            name: fileName || 'archivo',
-            fullPath: line.trim(),
-            isDirectory: false, // El comando find retorna archivos
-            type: '-',
-            size: '-',
-            perms: '-'
+            name: nombre,
+            fullPath: path === '/' ? `/${nombre}` : `${path}/${nombre}`,
+            isDirectory: isDir,
+            size: size,
+            perms: perms
           }
         })
-      } else {
-        // Si find falla, mostrar una lista vacía
-        items.value = []
       }
     }
   } catch (err) {
-    console.error('Error loading directory:', err)
+    console.error('Error cargando el directorio:', err)
   }
   loading.value = false
 }
 
 async function handleItemClick(item) {
   if (item.isDirectory) {
-    // Navigate into directory
     const newPath = currentPath.value === '/' 
       ? `/${item.name}`
       : `${currentPath.value}/${item.name}`
     currentPath.value = newPath
     await loadDirectory(newPath)
   } else {
-    // Select file for preview
     selectedFile.value = item
     await loadFileContent(item)
   }
@@ -167,11 +175,8 @@ async function handleItemClick(item) {
 async function loadFileContent(file) {
   fileContent.value = ''
   try {
-    const filePath = currentPath.value === '/' 
-      ? `/${file.name}`
-      : `${currentPath.value}/${file.name}`
-    
-    const script = `cat -path=${filePath}`
+    // Comando estandar en MIA para leer archivos
+    const script = `cat -file1=${file.fullPath}`
     
     const res = await fetch(`${BACKEND}/ejecutar`, {
       method: 'POST',
@@ -182,12 +187,15 @@ async function loadFileContent(file) {
     if (res.ok) {
       const data = await res.json()
       const resultado = data.lineas[0]
-      if (resultado.valida) {
+      if (resultado && resultado.valida) {
         fileContent.value = resultado.mensaje
+      } else {
+        fileContent.value = "// Error al leer el archivo desde el backend"
       }
     }
   } catch (err) {
-    console.error('Error loading file:', err)
+    console.error('Error cargando archivo:', err)
+    fileContent.value = "// Error de conexión"
   }
 }
 
@@ -197,7 +205,6 @@ function navigateTo(path) {
 }
 
 function goBack() {
-  // Emitir evento para volver a partition-selection
   emit('back')
 }
 
@@ -205,7 +212,7 @@ function openTerminal() {
   emit('navigate', { action: 'openTerminal' })
 }
 
-// Initial load
+// Carga inicial
 loadDirectory('/')
 </script>
 

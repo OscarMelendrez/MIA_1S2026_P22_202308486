@@ -1,7 +1,6 @@
 <template>
   <div class="app">
 
-    <!-- ── Header ─────────────────────────────────────────── -->
     <header class="header" v-if="currentView !== 'command-terminal' && currentView !== 'login'">
       <div class="header-left">
         <div class="logo-icon">
@@ -29,38 +28,32 @@
       </div>
     </header>
 
-    <!-- ── Home View ────────────────────────────────────── -->
     <component v-if="currentView === 'home'" :is="components.home" 
       @login="goToLogin" />
 
-    <!-- ── Login View ────────────────────────────────────── -->
     <component v-else-if="currentView === 'login'" :is="components.login" 
       @login="handleLogin" 
       @cancel="handleCancelLogin"
       :backendOk="backendOk" />
 
-    <!-- ── Command Terminal (Main) ──────────────────────────– -->
     <component v-else-if="currentView === 'command-terminal'" :is="components.commandTerminal"
       :sesion="sesion"
       :backendOk="backendOk"
       @logout="logout"
-      @login="goToLogin" />
+      @login="goToLogin"
+      @openVisualizer="currentView = 'disk-selection'" />
 
-    <!-- ── Main Layout ────────────────────────────────────── -->
     <main class="main" v-else>
 
-      <!-- ── Disk Selection ──────────────────────────────────– -->
       <component v-if="currentView === 'disk-selection'" :is="components.diskSelection"
         :backendOk="backendOk"
         @select="handleDiskSelect" />
 
-      <!-- ── Partition Selection ──────────────────────────────– -->
       <component v-else-if="currentView === 'partition-selection'" :is="components.partitionSelection"
         :discoSeleccionado="discoSeleccionado"
         @select="handlePartitionSelect"
         @back="handleBackFromPartitionSelection" />
 
-      <!-- ── File Explorer ────────────────────────────────────– -->
       <component v-else-if="currentView === 'file-explorer'" :is="components.fileExplorer"
         :sesion="sesion"
         :discoSeleccionado="discoSeleccionado"
@@ -68,12 +61,12 @@
         @viewFile="handleViewFile"
         @back="handleBackFromFileExplorer" />
 
-      <!-- ── Command Terminal ─────────────────────────────────– -->
       <component v-else-if="currentView === 'command-terminal'" :is="components.commandTerminal"
         :sesion="sesion"
         :backendOk="backendOk"
         @logout="logout"
-        @back="handleBackFromCommandTerminal" />
+        @back="handleBackFromCommandTerminal"
+        @openVisualizer="currentView = 'disk-selection'" />
 
     </main>
   </div>
@@ -154,7 +147,17 @@ function handleViewFile(file) {
   currentView.value = 'file-explorer'
 }
 
-function logout() {
+async function logout() {
+  try {
+    await fetch(`${BACKEND}/ejecutar`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script: 'logout' })
+    })
+  } catch (err) {
+    console.error('Error al intentar cerrar sesión en el backend:', err)
+  }
+
   sesion.value = { activa: false, usuario: 'root', particion: '', id: '' }
   discoSeleccionado.value = null
   currentView.value = 'command-terminal'

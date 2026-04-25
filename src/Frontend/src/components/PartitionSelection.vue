@@ -36,27 +36,29 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-
 import BACKEND from '../config.js'
 
 const props = defineProps({
-  discoSeleccionado: Object
+  discoSeleccionado: Object // Recibe el disco que seleccionaste en la pantalla anterior
 })
 
 const emit = defineEmits(['select', 'back'])
-
 const particionesData = ref([])
 
 const particiones = computed(() => {
-  // Retornar particiones del disco seleccionado
-  return particionesData.value.map((p, index) => ({
-    label: `partición${index + 1}`,
-    id: p.id,
-    size: p.size,
-    status: 'Montada',
-    path: p.path,
-    nombre: p.nombre
-  }))
+  if (!props.discoSeleccionado) return []
+
+  // Filtramos solo las particiones que pertenecen a la ruta del disco seleccionado
+  return particionesData.value
+    .filter(p => p.path === props.discoSeleccionado.path)
+    .map(p => ({
+      label: p.nombre,
+      id: p.id,
+      size: p.size,
+      status: 'Montada',
+      path: p.path,
+      nombre: p.nombre
+    }))
 })
 
 async function loadPartitions() {
@@ -67,7 +69,7 @@ async function loadPartitions() {
       particionesData.value = data.particiones || []
     }
   } catch (err) {
-    console.error('Error loading partitions:', err)
+    console.error('Error cargando particiones:', err)
   }
 }
 

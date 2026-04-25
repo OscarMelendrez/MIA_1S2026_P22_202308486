@@ -31,49 +31,47 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-
 import BACKEND from '../config.js'
 
-const props = defineProps({
-  backendOk: Boolean
-})
-
+const props = defineProps({ backendOk: Boolean })
 const emit = defineEmits(['select'])
 
-const discosData = ref([])
+const particionesMontadas = ref([])
 
+// Analiza los datos del backend y agrupa particiones por disco (usando su ruta física)
 const discos = computed(() => {
-  // Generar discos dinámicamente basados en los datos montados
-  const letters = ['A', 'B', 'C', 'D']
-  return letters.map((letter, index) => ({
-    label: `${letter}:mia`,
-    path: `Disco ${letter}`,
-    index: index,
-    id: discosData.value[index]?.id || `Disco${letter}`
-  }))
+  const discosUnicos = new Map()
+
+  particionesMontadas.value.forEach(p => {
+    if (!discosUnicos.has(p.path)) {
+      // Extrae solo el nombre del archivo (ej. /home/user/discos/A.mia -> A.mia)
+      const fileName = p.path.split('/').pop() || p.path
+      discosUnicos.set(p.path, {
+        label: fileName,
+        path: p.path
+      })
+    }
+  })
+
+  return Array.from(discosUnicos.values())
 })
 
 async function loadMountedDisks() {
   if (!props.backendOk) return
-
   try {
     const res = await fetch(`${BACKEND}/mounted`, { method: 'GET' })
     if (res.ok) {
       const data = await res.json()
-      discosData.value = data.particiones || []
+      // Guardamos la respuesta cruda de tu C++
+      particionesMontadas.value = data.particiones || []
     }
   } catch (err) {
-    console.error('Error loading disks:', err)
+    console.error('Error cargando discos del backend:', err)
   }
 }
 
 function selectDisk(disco) {
-  emit('select', {
-    label: disco.label,
-    path: disco.path,
-    index: disco.index,
-    id: disco.id
-  })
+  emit('select', disco)
 }
 
 onMounted(() => {

@@ -387,6 +387,12 @@ static LineAnalysis ProcesarLinea(const std::string& lineaOrig) {
             std::string id = getParam(params, "id", "JOURNALING");
             r.mensaje = FileSystem::Journaling(id);
         }
+        // ==========================================
+        else if (cmd == "ls") {
+            // Comando interno para el frontend: ls -path=/ruta
+            std::string path = getParam(params, "path", "LS");
+            r.mensaje = FileManagement::Ls(path);
+        }
 
         // ── COMANDO NO RECONOCIDO ─────────────────────────────
         else {
