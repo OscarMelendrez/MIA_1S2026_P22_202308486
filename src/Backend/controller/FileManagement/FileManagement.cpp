@@ -1489,10 +1489,10 @@ std::string Ls(const std::string& path) {
             if (targetInodoIdx != -1) {
                 std::string nombre = bc.b_content[j].b_name;
                 
-                // Omitir "." y ".." para que no saturen la vista en el Frontend
+                // Omitir "." y ".."
                 if (nombre == "." || nombre == "..") continue;
                 
-                // Leer el inodo del archivo hijo para saber su tamaño y tipo
+                // Leer el inodo del archivo hijo
                 Inodo target{};
                 file.seekg(sb.s_inode_start + targetInodoIdx * sizeof(Inodo));
                 file.read(reinterpret_cast<char*>(&target), sizeof(Inodo));
@@ -1502,14 +1502,14 @@ std::string Ls(const std::string& path) {
                 int tamano = target.i_s;
                 std::string permisos = std::string(1, target.i_perm[0]) + target.i_perm[1] + target.i_perm[2];
                 
-                // Unir todo en el formato "Nombre | Tipo | Tamaño | Permisos"
+                // Unir todo
                 salida += nombre + " | " + tipo + " | " + std::to_string(tamano) + " | " + permisos + "\n";
             }
         }
     }
     
     file.close();
-    return salida; // Si está vacío, devolverá un string en blanco
+    return salida;
 }
 
 } // namespace FileManagement

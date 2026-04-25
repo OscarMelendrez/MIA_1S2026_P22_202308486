@@ -63,4 +63,7 @@ std::string Chmod(const std::string& path,
                   const std::string& ugo,
                   bool               r = false);
 
+// Lista el contenido de un directorio para el Frontend en formato Pipe (|)
+std::string Ls(const std::string& path);
+
 } // namespace FileManagement
