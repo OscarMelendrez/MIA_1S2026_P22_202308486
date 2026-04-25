@@ -15,6 +15,7 @@ void EjecutarScriptHandler(const crow::request& req, crow::response& res) {
     } catch (...) {
         res.code = 400;
         res.set_header("Content-Type", "application/json");
+        res.set_header("Access-Control-Allow-Origin", "*");
         res.write(nlohmann::json{
             {"exito",  false},
             {"error",  "Body debe ser JSON con campo 'script'"},
@@ -27,6 +28,7 @@ void EjecutarScriptHandler(const crow::request& req, crow::response& res) {
     if (!body.contains("script") || !body["script"].is_string()) {
         res.code = 400;
         res.set_header("Content-Type", "application/json");
+        res.set_header("Access-Control-Allow-Origin", "*");
         res.write(nlohmann::json{
             {"exito",  false},
             {"error",  "Campo 'script' requerido (string)"},
@@ -49,6 +51,7 @@ void EjecutarScriptHandler(const crow::request& req, crow::response& res) {
     } catch (const std::exception& e) {
         res.code = 500;
         res.set_header("Content-Type", "application/json");
+        res.set_header("Access-Control-Allow-Origin", "*");
         res.write(nlohmann::json{
             {"exito",  false},
             {"error",  std::string("Error interno: ") + e.what()},

@@ -1,7 +1,7 @@
 CMakeFiles/Backend.dir/Analyzer/Analyzer.cpp.o: \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/Analyzer/Analyzer.cpp \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/Analyzer/Analyzer.cpp \
  /usr/include/stdc-predef.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/Analyzer/Analyzer.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/Analyzer/Analyzer.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -116,7 +116,7 @@ CMakeFiles/Backend.dir/Analyzer/Analyzer.cpp.o: \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/Analyzer/../model/result.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/Analyzer/../model/result.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_uninitialized.h \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
@@ -289,9 +289,9 @@ CMakeFiles/Backend.dir/Analyzer/Analyzer.cpp.o: \
  /usr/include/nlohmann/ordered_map.hpp /usr/include/c++/13/any \
  /usr/include/nlohmann/detail/macro_unscope.hpp \
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/DiskManagement/../DiskManagement/DiskManagement.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/DiskManagement/../FileSystem/FileSystem.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/DiskManagement/../UserManagement/UserManagement.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/DiskManagement/../FileManagement/FileManagement.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/DiskManagement/../Reports/Reports.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/DiskManagement/../../model/structures.h
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../DiskManagement/DiskManagement.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../FileSystem/FileSystem.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../UserManagement/UserManagement.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../FileManagement/FileManagement.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../Reports/Reports.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/DiskManagement/../../model/structures.h

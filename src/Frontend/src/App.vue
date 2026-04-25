@@ -88,7 +88,7 @@ import PartitionSelection from './components/PartitionSelection.vue'
 import FileExplorer from './components/FileExplorer.vue'
 import CommandTerminal from './components/CommandTerminal.vue'
 
-const BACKEND = ''
+import BACKEND from './config.js'
 
 // ── Estado Global ──────────────────────────────────────────
 const currentView = ref('command-terminal')

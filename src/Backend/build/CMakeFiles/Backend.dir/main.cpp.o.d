@@ -1,7 +1,7 @@
 CMakeFiles/Backend.dir/main.cpp.o: \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/main.cpp \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/main.cpp \
  /usr/include/stdc-predef.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/external/crow_all.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/external/crow_all.h \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -1631,8 +1631,8 @@ CMakeFiles/Backend.dir/main.cpp.o: \
  /usr/include/boost/date_time/filetime_functions.hpp \
  /usr/include/boost/date_time/posix_time/time_parsers.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/bits/this_thread_sleep.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/handler.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/model/structures.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/handler.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/model/structures.h \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \

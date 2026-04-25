@@ -180,6 +180,24 @@ int main() {
             ReportesHandler(req, res, filename);
         });
 
+    CROW_ROUTE(app, "/ejecutar")
+        .methods(crow::HTTPMethod::OPTIONS)
+        ([](const crow::request& req, crow::response& res) {
+            CorsPreflightHandler(req, res);
+        });
+
+    CROW_ROUTE(app, "/mounted")
+        .methods(crow::HTTPMethod::OPTIONS)
+        ([](const crow::request& req, crow::response& res) {
+            CorsPreflightHandler(req, res);
+        });
+
+    CROW_ROUTE(app, "/reportes/<string>")
+        .methods(crow::HTTPMethod::OPTIONS)
+        ([](const crow::request& req, crow::response& res, std::string) {
+            CorsPreflightHandler(req, res);
+        });
+
     CROW_ROUTE(app, "/<path>")
         .methods(crow::HTTPMethod::OPTIONS)
         ([](const crow::request& req, crow::response& res, std::string) {

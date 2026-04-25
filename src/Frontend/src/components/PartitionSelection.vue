@@ -37,7 +37,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 
-const BACKEND = ''
+import BACKEND from '../config.js'
 
 const props = defineProps({
   discoSeleccionado: Object

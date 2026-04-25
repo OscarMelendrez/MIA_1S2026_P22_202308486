@@ -1,7 +1,7 @@
 CMakeFiles/Backend.dir/controller/Reports/Reports.cpp.o: \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/Reports/Reports.cpp \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/Reports/Reports.cpp \
  /usr/include/stdc-predef.h \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/Reports/Reports.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/Reports/Reports.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -120,7 +120,7 @@ CMakeFiles/Backend.dir/controller/Reports/Reports.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/Reports/../../Utilities/utilities.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/Reports/../../Utilities/utilities.h \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/ios /usr/include/c++/13/exception \
  /usr/include/c++/13/bits/exception_ptr.h \
@@ -161,7 +161,7 @@ CMakeFiles/Backend.dir/controller/Reports/Reports.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/controller/Reports/../../model/structures.h \
+ /home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/controller/Reports/../../model/structures.h \
  /usr/include/c++/13/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \

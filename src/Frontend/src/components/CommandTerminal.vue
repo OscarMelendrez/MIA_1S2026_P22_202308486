@@ -158,7 +158,7 @@ mkdir -path=/nueva_carpeta
 <script setup>
 import { ref, computed, nextTick } from 'vue'
 
-const BACKEND = ''
+import BACKEND from '../config.js'
 
 const props = defineProps({
   sesion: Object,

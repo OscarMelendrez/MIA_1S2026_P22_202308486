@@ -1,3 +1,3 @@
-/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/build/CMakeFiles/Backend.dir
-/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/build/CMakeFiles/edit_cache.dir
-/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/P2/MIA_1S2026_P2_carnet/src/Backend/build/CMakeFiles/rebuild_cache.dir
+/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles/Backend.dir
+/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles/edit_cache.dir
+/home/oscaredd/Escritorio/1S2026/ARCHIVOS/PROYECTOS/MIA_1S2026_P22_202308486/src/Backend/build/CMakeFiles/rebuild_cache.dir

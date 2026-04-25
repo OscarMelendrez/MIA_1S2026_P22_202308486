@@ -32,7 +32,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 
-const BACKEND = ''
+import BACKEND from '../config.js'
 
 const props = defineProps({
   backendOk: Boolean

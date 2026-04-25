@@ -82,7 +82,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const BACKEND = ''
+import BACKEND from '../config.js'
 
 const props = defineProps({
   sesion: Object,
