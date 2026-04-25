@@ -14,7 +14,7 @@ void EjecutarScriptHandler(const crow::request& req, crow::response& res) {
         body = nlohmann::json::parse(req.body);
     } catch (...) {
         res.code = 400;
-        res.set_header("Content-Type", "application/json");
+        res.set_header("Content-Type",                "application/json");
         res.set_header("Access-Control-Allow-Origin", "*");
         res.write(nlohmann::json{
             {"exito",  false},
@@ -27,7 +27,7 @@ void EjecutarScriptHandler(const crow::request& req, crow::response& res) {
 
     if (!body.contains("script") || !body["script"].is_string()) {
         res.code = 400;
-        res.set_header("Content-Type", "application/json");
+        res.set_header("Content-Type",                "application/json");
         res.set_header("Access-Control-Allow-Origin", "*");
         res.write(nlohmann::json{
             {"exito",  false},
@@ -47,19 +47,21 @@ void EjecutarScriptHandler(const crow::request& req, crow::response& res) {
         res.set_header("Content-Type",                "application/json");
         res.set_header("Access-Control-Allow-Origin", "*");
         res.write(resp.dump(4));
+        res.end(); // ✅ movido aquí dentro del try
 
     } catch (const std::exception& e) {
         res.code = 500;
-        res.set_header("Content-Type", "application/json");
+        res.set_header("Content-Type",                "application/json");
         res.set_header("Access-Control-Allow-Origin", "*");
         res.write(nlohmann::json{
             {"exito",  false},
             {"error",  std::string("Error interno: ") + e.what()},
             {"lineas", nlohmann::json::array()}
         }.dump());
+        res.end(); // ✅ también aquí dentro del catch
     }
 
-    res.end();
+    // ❌ eliminado el res.end() de aquí afuera — causaba doble llamada
 }
 
 // ============================================================
@@ -104,16 +106,18 @@ void CorsPreflightHandler(const crow::request& /*req*/, crow::response& res) {
 void ReportesHandler(const crow::request& /*req*/, crow::response& res,
                      const std::string& filename)
 {
-    // Construir ruta absoluta al archivo
-    std::string filePath = DISCOS_DIR + "/reportes/" + filename;
-
     // Seguridad: no permitir path traversal
     if (filename.find("..") != std::string::npos ||
         filename.find('/') != std::string::npos) {
         res.code = 400;
+        res.set_header("Access-Control-Allow-Origin", "*");
+        res.write("Nombre de archivo invalido");
         res.end();
         return;
     }
+
+    // Construir ruta absoluta al archivo
+    std::string filePath = DISCOS_DIR + "/reportes/" + filename;
 
     std::ifstream f(filePath, std::ios::binary);
     if (!f.is_open()) {
